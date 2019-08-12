@@ -1,0 +1,21 @@
+@import '../../../scss/variables';
+
+.phone-item {
+  display: flex;
+  justify-content: space-between;
+  padding: $padding/4 0;
+  box-shadow: 0 1px 0 0 $dark-gray;
+  font-style: italic;
+
+  .row-info:first-child {
+    padding-right: $padding*1.5;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .row-info:last-child {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+}

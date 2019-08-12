@@ -1,0 +1,139 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.book {
+  transform-style: preserve-3d;
+  position: relative;
+  height: $book-height;
+  width: $book-width;
+  backface-visibility: visible;
+
+  .front-page,
+  .back-page,
+  .under-first-page,
+  .under-last-page,
+  .first-page,
+  .last-page {
+    box-sizing: border-box;
+    padding: $padding;
+    transform-style: preserve-3d;
+    position: absolute;
+    width: $book-width;
+    top: 0;
+    left: $book-width / 2;
+    transform-origin: left center;
+    transition: transform .5s ease-in-out, box-shadow .35s ease-in-out;
+  }
+
+  .front-page {
+    @include page-effects(0, ($page-shadow, -7px 0 0 0 $dark-blue));
+
+    font-family: cursive;
+    font-size: 76px;
+    padding: 50px 0 0 50px;
+
+    .note {
+      position: absolute;
+      padding: $padding;
+      right: $padding / 2;
+      bottom: $padding;
+      background: none;
+      border: none;
+      z-index: 9;
+    }
+  }
+
+  .under-first-page,
+  .under-last-page,
+  .first-page,
+  .last-page {
+    height: $book-height - 2*$padding;
+    margin: $padding 0;
+  }
+
+  .front-page,
+  .back-page {
+    height: $book-height;
+    background: $yellow;
+  }
+
+  .under-first-page,
+  .under-last-page {
+    background: $gray;
+  }
+
+  .first-page,
+  .last-page {
+    background: $light-grey;
+  }
+
+  .front-page,
+  .under-first-page,
+  .first-page {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .back-page,
+  .under-last-page,
+  .last-page {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .first-page,
+  .last-page {
+    .page-navigation {
+      position: absolute;
+      bottom: -$padding;
+    }
+
+    .subPage {
+      height: calc(100% - #{$padding});
+      position: relative;
+    }
+  }
+
+  .first-page {
+    .page-navigation {
+      left: 0;
+    }
+  }
+
+  .last-page {
+    .page-navigation {
+      right: 0;
+    }
+  }
+
+  &.open {
+    .front-page {
+      @include page-effects(-160deg);
+    }
+
+    .back-page {
+      @include page-effects(-20deg);
+    }
+
+    .under-first-page {
+      @include page-effects(-150deg);
+    }
+
+    .under-last-page {
+      @include page-effects(-30deg);
+    }
+
+    .first-page {
+      @include page-effects(-145deg, ($page-shadow, inset 10px 0 10px -10px rgba(0, 0, 0, 0.3)));
+
+      .subPage {
+        transform: rotateY(180deg);
+        transform-origin: center;
+      }
+    }
+
+    .last-page {
+      @include page-effects(-35deg, ($page-shadow, inset 10px 0 10px -10px rgba(0, 0, 0, 0.3)));
+    }
+  }
+}

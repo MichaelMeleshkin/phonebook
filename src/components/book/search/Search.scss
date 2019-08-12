@@ -1,0 +1,9 @@
+@import '../../../scss/variables';
+
+.search {
+  padding-bottom: $padding * 1.5;
+
+  .search-input {
+    margin-right: $padding;
+  }
+}

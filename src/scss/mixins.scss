@@ -1,0 +1,6 @@
+@import '../scss/variables';
+
+@mixin page-effects($angle, $shadow: $page-shadow) {
+    transform: rotateY($angle);
+    box-shadow: $shadow;
+}
