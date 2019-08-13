@@ -12,6 +12,10 @@ class PhonePages extends React.Component {
             isNextLinkVisible: false,
         };
 
+        const { number, searchQuery } = this.props.match.params;
+        this.firstPageData = getFirstPageData({ number, searchQuery });
+        this.secondPageData = getSecondPageData({ number, searchQuery });
+
         this.checkNextLinkVisibility = this.checkNextLinkVisibility.bind(this);
     }
 
@@ -22,12 +26,11 @@ class PhonePages extends React.Component {
     }
 
     render() {
-        const { number, searchQuery } = this.props.match.params;
         return (
             <div>
                 <Page className="first-page">
                     <Search search={this.props.match.params.searchQuery} />
-                    <Phones data={getFirstPageData({ number, searchQuery })} {...this.props} />
+                    <Phones data={this.firstPageData} {...this.props} />
                     {
                         this.props.match.params.number > 1 ?
                             <Link className="page-navigation"
@@ -41,7 +44,7 @@ class PhonePages extends React.Component {
                     }
                 </Page>
                 <Page className="last-page">
-                    <Phones data={getSecondPageData({ number, searchQuery })} {...this.props}
+                    <Phones data={this.secondPageData} {...this.props}
                                 onPromiceResolve={this.checkNextLinkVisibility}/>
                     {
                         this.state.isNextLinkVisible ?

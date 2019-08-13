@@ -10,7 +10,3 @@ export function get(url) {
         },
     }).then(response => response.json());
 }
-
-export function post(url, body) {
-    return fetch(`${domain}${url}`, {method: 'POST', body});
-}

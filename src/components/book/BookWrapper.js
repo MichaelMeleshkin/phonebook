@@ -4,24 +4,13 @@ import './BookWrapper.scss'
 import { save as saveSessionItem, get as getSessionItem } from '../../services/sessionStorageService'
 
 export default function withBookWrapper(Component) {
-    // const { Phones: FirstElement, data: fData } = firstPageData;
-    // const { Phones: SecondElement, data: sData } = secondPageData;
-
     return class extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
                 isToggleOn: getSessionItem('isToggleOn'),
-                // search: this.props.match.params.search || '',
             };
             this.openBook = this.openBook.bind(this);
-            // this.onChangeHandler = this.onChangeHandler.bind(this);
-
-            // Promise.all([fData, sData]).then(([firstData, secondData]) => {
-            //     this.setState(state => ({
-            //         isNextLinkVisible: secondData && secondData.length && secondData.length === paginationLimit
-            //     }));
-            // })
         }
 
         openBook() {
@@ -30,10 +19,6 @@ export default function withBookWrapper(Component) {
                 isToggleOn: true
             }));
         };
-
-        // onChangeHandler(e) {
-        //     this.setState({search: e.target.value});
-        // }
 
         render() {
             return (
