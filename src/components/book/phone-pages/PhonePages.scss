@@ -1,0 +1,9 @@
+@import '../../../scss/variables';
+
+.page-number {
+  position: absolute;
+  left: $book-width / 2 - $padding * 2;
+  right: $book-width / 2 - $padding * 2;
+  bottom: -$padding;
+  text-align: center;
+}

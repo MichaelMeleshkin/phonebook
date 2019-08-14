@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Page from '../Page';
 import Phones from '../phones/Phones';
 import Search from '../search/Search'
-import { Link } from "react-router-dom";
-import { getFirstPageData, getSecondPageData, paginationLimit } from './PhonePagesService';
+import * as phonePagesService from './PhonePagesService';
+import './PhonePages.scss';
 
 class PhonePages extends React.Component {
     constructor(props) {
@@ -13,15 +14,17 @@ class PhonePages extends React.Component {
         };
 
         const { number, searchQuery } = this.props.match.params;
-        this.firstPageData = getFirstPageData({ number, searchQuery });
-        this.secondPageData = getSecondPageData({ number, searchQuery });
+        this.firstPageData = phonePagesService.getFirstPageData({ number, searchQuery });
+        this.secondPageData = phonePagesService.getSecondPageData({ number, searchQuery });
+        this.firstPageNumber = phonePagesService.getFirstPageNumber(number);
+        this.secondPageNumber = phonePagesService.getSecondPageNumber(number);
 
         this.checkNextLinkVisibility = this.checkNextLinkVisibility.bind(this);
     }
 
     checkNextLinkVisibility(responce) {
         this.setState(state => ({
-            isNextLinkVisible: responce && responce.length && responce.length === paginationLimit
+            isNextLinkVisible: responce && responce.length && responce.length === phonePagesService.paginationLimit
         }));
     }
 
@@ -31,6 +34,7 @@ class PhonePages extends React.Component {
                 <Page className="first-page">
                     <Search search={this.props.match.params.searchQuery} />
                     <Phones data={this.firstPageData} {...this.props} />
+                    <div className="page-number">{this.firstPageNumber}</div>
                     {
                         this.props.match.params.number > 1 ?
                             <Link className="page-navigation"
@@ -46,6 +50,7 @@ class PhonePages extends React.Component {
                 <Page className="last-page">
                     <Phones data={this.secondPageData} {...this.props}
                                 onPromiceResolve={this.checkNextLinkVisibility}/>
+                    <div className="page-number">{this.secondPageNumber}</div>
                     {
                         this.state.isNextLinkVisible ?
                             <Link className="page-navigation"

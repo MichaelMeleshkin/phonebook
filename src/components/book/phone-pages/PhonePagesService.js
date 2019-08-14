@@ -9,14 +9,22 @@ function getPageData(url, searchQuery) {
     return get(`${url}`);
 }
 
+export function getFirstPageNumber(number) {
+    return (number-1)*2+1;
+}
+
+export function getSecondPageNumber(number) {
+    return number*2;
+}
+
 export function getFirstPageData({number, limit, searchQuery}={}) {
     limit = limit || paginationLimit;
-    const url = `/users?_page=${(number-1)*2+1}&_limit=${limit-2}`;
+    const url = `/users?_page=${getFirstPageNumber(number)}&_limit=${limit-2}`;
     return getPageData(url, searchQuery);
 }
 
 export function getSecondPageData({number, limit, searchQuery}={}) {
     limit = limit || paginationLimit;
-    const url = `/users?_page=${number*2}&_limit=${limit}`;
+    const url = `/users?_page=${getSecondPageNumber(number)}&_limit=${limit}`;
     return getPageData(url, searchQuery);
 }
