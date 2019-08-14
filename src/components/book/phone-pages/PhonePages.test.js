@@ -1,8 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import PhonePages from './PhonePages';
-import Search from '../search/Search'
 import { Link } from "react-router-dom";
+import { shallow } from 'enzyme';
+import Search from '../search/Search';
+import PhonePages from './PhonePages';
 import * as api from './PhonePagesService';
 
 jest.mock('./PhonePagesService.js');
@@ -24,7 +24,7 @@ describe('The Phone Page viewer', () => {
         phonePagesMock.unmount();
     });
 
-    it('calls API with params', () => {
+    it('should call API with params', () => {
         const getFirstPageDataSpy = jest.spyOn(api, 'getFirstPageData');
         const getSecondPageDataSpy = jest.spyOn(api, 'getSecondPageData');
 
@@ -35,17 +35,17 @@ describe('The Phone Page viewer', () => {
         expect(getSecondPageDataSpy).toHaveBeenCalledWith(fakeRouteProps.match.params);
     });
 
-    it('renders with search component', () => {
+    it('should render component with search component', () => {
         expect(phonePagesMock.find(Search)).toHaveLength(1);
     });
 
-    it('renders with "next page" link only', () => {
+    it('should render component with "next page" link only', () => {
         expect(phonePagesMock.state().isNextLinkVisible).toEqual(false);
         phonePagesMock.setState({ isNextLinkVisible: true });
         expect(phonePagesMock.find(Link)).toHaveLength(1);
     });
 
-    it('renders with "prev page" link only', () => {
+    it('should render component with "prev page" link only', () => {
         phonePagesMock.unmount();
         fakeRouteProps.match.params.number = 2;
         phonePagesMock = shallow(<PhonePages {...fakeRouteProps} />);
@@ -53,12 +53,9 @@ describe('The Phone Page viewer', () => {
         expect(phonePagesMock.find(Link)).toHaveLength(1);
     });
 
-    it('calls checker for "next page" link', () => {
+    it('should call checker for "next page" link', () => {
         expect(phonePagesMock.state().isNextLinkVisible).toEqual(false);
         phonePagesMock.instance().checkNextLinkVisibility(new Array(api.paginationLimit));
         expect(phonePagesMock.state().isNextLinkVisible).toEqual(true);
     });
-
 });
-
-
