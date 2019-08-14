@@ -1,32 +1,39 @@
 
 ## How to run it localy:
 
-##### 1. During development I was using node v10.13.0. You may use nvm to install:
- ```text
+##### 1. During development I was using nodejs v10.13.0. You may use nvm to install the nodejs:
+```text
 $ nvm install 10.13.0
 ```
-See: [How to install Node.js on Ubuntu 16.04/18.04 using NVM (Node Version Manager)](https://hackernoon.com/how-to-install-node-js-on-ubuntu-16-04-18-04-using-nvm-node-version-manager-668a7166b854)
+
+##### 1.1 To install the NVM you may use next command:
+```text
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+```
+After instaling you probably need to restart the terminal.
+For more information: [https://github.com/nvm-sh/nvm](https://github.com/nvm-sh/nvm)
 
 ##### 2. You may check the node version by next command:
- ```text
+```text
 $ nvm current
 ```
-##### 3. If you see another version less then 10.13.0, use next command to switch on 10.13.0:
- ```text
+
+##### 3. If you see another version less then v10.13.0, use next command to switch on v10.13.0:
+```text
 $ nvm use 10.13.0
 ```
 
-##### 4. Open terminal, check node version (see #2) and run next command to install all dependencies:
- ```text
+##### 4. Open terminal in source folder of the project, check node version (see #2) and run next command to install all dependencies:
+```text
 $ npm install
 ```
 
-##### 5. Open terminal, check node version (see #2) and run the server by next command:
- ```text
+##### 5. After installing all dependencies you should run the server by next command:
+```text
 $ npm run server
 ```
 
-##### 6. Open terminal, check node version (see #2) and run the application:
- ```text
+##### 6. Open new terminal, check node version (see #2) and run the application:
+```text
 $ npm run start
 ```
